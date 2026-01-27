@@ -1,10 +1,10 @@
 public class customer {
     String customername;
-    String Name;
+    String name;
 
     public customer(String customername, String name) {
         this.customername = customername;
-        this.Name = name;
+        this.name = name;
     }
     
     public String getCustomerUsername() {

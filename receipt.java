@@ -1,12 +1,12 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-public class receipt {
+public class Receipt {
 
     private customer customer;
-    private cart cart;
+    private Cart cart;
     private LocalDateTime dateTime;
 
-    public receipt(customer customer, cart cart) {
+    public Receipt(customer customer, Cart cart) {
         this.customer = customer;
         this.cart = cart;
         this.dateTime = LocalDateTime.now();

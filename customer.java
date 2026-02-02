@@ -3,12 +3,14 @@ public class customer {
     String email;
     String phone;
     String address;
+    int balance;
 
-    public customer(String customername, String phone, String email, String address) {
+    public customer(String customername, String phone, String email, String address, int balance) {
         this.customername = customername;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.balance = balance;
     }
     
     public String getCustomerUsername() {
@@ -26,5 +28,14 @@ public class customer {
     public String getAddress() {
         return address;
     }
+
+    public int remainingBalance(int total) {
+        if (this.balance <= total) {
+            this.balance -= total;
+            return this.balance;
+        } else {
+            return null; // Means customer doesn't have enough balance
+        }
 }
+
 

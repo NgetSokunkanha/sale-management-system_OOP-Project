@@ -1,8 +1,10 @@
-public class customer {
+public class Customer {
+    //define class customer
+
     String customername;
     String name;
 
-    public customer(String customername, String name) {
+    public Customer(String customername, String name) {
         this.customername = customername;
         this.name = name;
     }

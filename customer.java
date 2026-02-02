@@ -1,5 +1,3 @@
-import java.util.Random; // To generate order ID
-
 public class customer {
     String customername;
     String email;
@@ -28,10 +26,5 @@ public class customer {
     public String getAddress() {
         return address;
     }
-
-    public int generateOrderID() {
-        Random rand = new Random();
-        int orderID = rand.nextInt(1000000); // From 0 to 999999
-        return orderID;
-    }
 }
+

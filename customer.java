@@ -37,13 +37,11 @@ public class customer {
         }
     }
     public int remainingBalance(int total) {
-        if (this.balance <= total) {
             this.balance -= total;
             return this.balance;
-        } else {
-            return null; // Means customer doesn't have enough balance
         }
 }
+
 
 
 

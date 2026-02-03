@@ -27,11 +27,6 @@ public class customer {
         this.address = address;
         this.balance = balance;
     }
-    
-    public String getCustomerUsername() {
-        return customername;
->>>>>>> cf210298247515b0f42c993f2321f3a1651287c3
-    }
 
     void printCustomer() {
         System.out.println("Customer Name: " + customerName);
@@ -43,13 +38,6 @@ public class customer {
 <<<<<<< HEAD
 }
 =======
-    public String getEmail() {
-        return email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
 
     public boolean enoughBalance() {
          if (this.balance <= total) {
@@ -69,3 +57,4 @@ public class customer {
 
 
 >>>>>>> cf210298247515b0f42c993f2321f3a1651287c3
+

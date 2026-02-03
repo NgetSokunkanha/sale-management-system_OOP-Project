@@ -29,6 +29,13 @@ public class customer {
         return address;
     }
 
+    public boolean enoughBalance {
+         if (this.balance <= total) {
+             return true;
+        } else {
+            return false; // Means customer doesn't have enough balance
+        }
+    }
     public int remainingBalance(int total) {
         if (this.balance <= total) {
             this.balance -= total;
@@ -37,5 +44,6 @@ public class customer {
             return null; // Means customer doesn't have enough balance
         }
 }
+
 
 

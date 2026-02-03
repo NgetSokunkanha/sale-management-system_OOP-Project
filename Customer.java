@@ -5,7 +5,7 @@ public class Customer {
     String address;
     Cart cart; 
 
-    public customer(String customerName, String phone, String email, String address) {
+    public Customer(String customerName, String phone, String email, String address) {
         this.customerName = customerName;
         this.phone = phone;
         this.email = email;
@@ -19,19 +19,8 @@ public class Customer {
         System.out.println("Email: " + email);
         System.out.println("Address: " + address);
     }
-
-    public boolean enoughBalance() {
-         if (this.balance <= total) {
-             return true;
-        } else {
-            return false;
-        }
-    }
-    public int remainingBalance(int total) {
-            this.balance -= total;
-            return this.balance;
-        }
 }
+
 
 
 

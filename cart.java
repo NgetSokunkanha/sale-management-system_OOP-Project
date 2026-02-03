@@ -1,26 +1,30 @@
-public class Cart {
+class Cart {
+    Product[] products = new Product[10]; 
+    int[] quantities = new int[10];
+    int itemCount = 0;         
 
-    Product[] products;
-    int count;
-
-    public Cart(Product[] products, int count) {
-        this.products = products;
-        this.count = count;
+    void addProduct(Product product, int quantity) {
+        products[itemCount] = product;
+        quantities[itemCount] = quantity;
+        itemCount++;
     }
 
-    public void addProduct(Product product) {
-      
+    double calculateTotal(Discount discount) {
+        double total = 0;
+        for (int i = 0; i < itemCount; i++) {
+            double price = products[i].DiscountProduct();
+            if (discount != null && discount.active && discount.product == products[i]) {
+                price = price * (1 - discount.percent / 100);
+            }
+            total += price * quantities[i];
+        }
+        return total;
     }
 
-    public void removeProduct(int index) {
-    
-    }
-
-    public double calculateTotal() {
-        return 0;
-    }
-
-    public void displayCart() {
-    
+    void printCart() {
+        System.out.println("Cart items:");
+        for (int i = 0; i < itemCount; i++) {
+            System.out.println(products[i].name + " x" + quantities[i] + " | $" + products[i].DiscountProduct());
+        }
     }
 }

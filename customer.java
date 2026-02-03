@@ -1,19 +1,23 @@
-public class Customer {
-    //define class customer
+class Customer {
+    String customerName;
+    String email;
+    String phone;
+    String address;
+    Cart cart; 
 
-    String customername;
-    String name;
-
-    public Customer(String customername, String name) {
-        this.customername = customername;
-        this.name = name;
-    }
-    
-    public String getCustomerUsername() {
-        return customername;
+    Customer(String customerName, String phone, String email, String address) {
+        this.customerName = customerName;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+        this.cart = new Cart();    
     }
 
-    public String getRealName() {
-        return name;
+    void printCustomer() {
+        System.out.println("Customer Name: " + customerName);
+        System.out.println("Phone: " + phone);
+        System.out.println("Email: " + email);
+        System.out.println("Address: " + address);
     }
+
 }

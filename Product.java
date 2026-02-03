@@ -1,34 +1,36 @@
 public class Product {
-    private int productId;
-    private String name;
-    private double price;
-    private int quantity;
+    String name;
+    double price;
+    int stock;
+    String expireDate;
+    double discountPercent;
 
-    public Product(int productId, String name, double price, int quantity) {
-        this.productId = productId;
+
+    Product(String name, double price, int stock, String expireDate, double discountPercent) {
         this.name = name;
         this.price = price;
-        this.quantity = quantity;
+        this.stock = stock;
+        this.expireDate = expireDate;
+        this.discountPercent = discountPercent;
     }
 
-    public int getProductId() {
-        return productId;
+    void print() {
+        System.out.println("Name: " + name + " | Price: $" + price + " | Stock: " + stock + " | Expire: " + expireDate + " | Discount: " + discountPercent + "%");
     }
 
-    public String getName() {
-        return name;
+     double DiscountProduct() {
+        return price * (1 - discountPercent / 100);
     }
 
-    public double getPrice() {
-        return price;
+    void reduceStock(int amount) {
+        stock -= amount;
+        if (stock < 0) {
+            stock = 0;
+        }
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void updateQuantity(int newQuantity) {
-        this.quantity = newQuantity;
+    boolean isExpired(String today) {
+        return expireDate.equals(today);
     }
 }
 

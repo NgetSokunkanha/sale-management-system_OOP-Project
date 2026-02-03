@@ -2,13 +2,22 @@ class Receipt {
     Customer customer;
     Cart cart;
     double totalAmount;
-    String dateTime; 
+    double vatAmount;
+    double finalAmount;
+    String dateTime;
+    String cashier;
 
-    Receipt(Customer customer, Cart cart) {
+    
+    static final double VAT_RATE = 0.10;
+
+    Receipt(Customer customer, Cart cart, String cashier) {
         this.customer = customer;
         this.cart = cart;
-        this.totalAmount = cart.calculateTotal(null); 
-        this.dateTime = "2026-02-02 12:00"; 
+        this.cashier = cashier;
+        this.totalAmount = cart.calculateTotal(null);
+        this.vatAmount = totalAmount * VAT_RATE;
+        this.finalAmount = totalAmount + vatAmount;
+        this.dateTime = "2026-02-02 12:00";
     }
 
     void displayReceipt() {
@@ -17,12 +26,15 @@ class Receipt {
         System.out.println("Phone         : " + customer.phone);
         System.out.println("Email         : " + customer.email);
         System.out.println("Address       : " + customer.address);
+        System.out.println("Cashier       : " + cashier);
         System.out.println("Date & Time   : " + dateTime);
 
-        cart.printCart(); 
+        cart.printCart();
 
         System.out.println("-------------------");
-        System.out.println("Total Amount  : $" + totalAmount);
+        System.out.println("Subtotal      : $" + totalAmount);
+        System.out.println("VAT (10%)     : $" + vatAmount);
+        System.out.println("Total Amount  : $" + finalAmount);
         System.out.println("-------------------");
     }
 }

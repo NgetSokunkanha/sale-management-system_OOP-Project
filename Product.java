@@ -15,17 +15,17 @@ public class Product {
     }
 
     void print() {
-        System.out.println("Name: " + name + " | Price: $" + price + " | Stock: " + stock + " | Expire: " + expireDate + " | Discount: " + discountPercent + "%");
+        System.out.println("Name: " + this.name + " | Price: $" + this.price + " | Stock: " + this.stock + " | Expire: " + this.expireDate + " | Discount: " + this.discountPercent + "%");
     }
 
-     double DiscountProduct() {
-        return price * (1 - discountPercent / 100);
+    double DiscountProduct() {
+        return price * (1 - this.discountPercent / 100);
     }
 
     void reduceStock(int amount) {
-        stock -= amount;
-        if (stock < 0) {
-            stock = 0;
+        this.stock -= amount;
+        if (this.stock < 0) {
+            this.stock = 0;
         }
     }
 

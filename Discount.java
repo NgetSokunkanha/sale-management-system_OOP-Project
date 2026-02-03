@@ -12,9 +12,9 @@ public class Discount {
     }
 
     void showDiscount() {
-        System.out.println("Discount Code: " + code);
-        System.out.println("Percent Off: " + percent + "%");
-        System.out.println("Active: " + active);
+        System.out.println("Discount Code: " + this.code);
+        System.out.println("Percent Off: " + this.percent + "%");
+        System.out.println("Active: " + this.active);
         if (product != null) {
             System.out.println("Discount to Product: " + product.name + " (Price: $" + product.price + ")");
         } else {

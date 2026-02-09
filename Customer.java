@@ -15,7 +15,7 @@ class Customer {
     }
 
     void enterPhone(String phone) {
-        if (phone.length != 9) {
+        if (phone.length() != 9) {
             System.out.println("Phone Number excceds/not enough length.");
         } else {
             this.phone = phone;
@@ -42,6 +42,7 @@ class Customer {
         return address;
     }
 }
+
 
 
 

@@ -1,25 +1,48 @@
 class Customer {
-    String customerName;
-    String email;
-    String phone;
-    String address;
-    Cart cart; 
+    private String customerName;
+    private String email;
+    private String phone;
+    private String address;
+    private Cart cart; 
 
-    Customer(String customerName, String phone, String email, String address) {
-        this.customerName = customerName;
-        this.phone = phone;
-        this.email = email;
-        this.address = address;
+    Customer(String name) {
+        this.customerName = name;
         this.cart = new Cart();  
     }  
 
-    void printCustomer() {
-        System.out.println("Customer Name: " + customerName);
-        System.out.println("Phone: " + phone);
-        System.out.println("Email: " + email);
-        System.out.println("Address: " + address);
+    void enterEmail(String email) {
+        this.email = email;
+    }
+
+    void enterPhone(String phone) {
+        if (phone.length != 9) {
+            System.out.println("Phone Number excceds/not enough length.");
+        } else {
+            this.phone = phone;
+        }  
+    }
+
+    void enterAddress(String address) {
+        this.address = address;
+    }
+
+    void getcustomerName() {
+        return name;
+    }
+
+    void getEmail() {
+        return email;
+    }
+
+    void getPhone() {
+        return phone;
+    }
+
+    void getAddress() {
+        return address;
     }
 }
+
 
 
 

@@ -35,13 +35,18 @@ class Customer {
     }
 
     void getPhone() {
-        return phone;
+        if (phone.length() === 9) {
+            return phone;
+        } else {
+            System.out.println("Invaild Phone Number length");
+        }
     }
 
     void getAddress() {
         return address;
     }
 }
+
 
 
 

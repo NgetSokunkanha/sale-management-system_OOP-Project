@@ -28,26 +28,23 @@ class Customer {
         this.address = address;
     }
 
-    public void getcustomerName() {
+    public String getcustomerName() {
         return name;
     }
 
-    public void getEmail() {
+    public String getEmail() {
         return email;
     }
 
-    public void getPhone() {
-        if (phone.length() === 9) {
-            return phone;
-        } else {
-            System.out.println("Invaild Phone Number length");
-        }
+    public String getPhone() {
+        return phone;
     }
 
-    public void getAddress() {
+    public String getAddress() {
         return address;
     }
 }
+
 
 
 

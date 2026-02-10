@@ -3,10 +3,12 @@ class Customer {
     private String email;
     private String phone;
     private String address;
+    private String description;
     private Cart cart; 
 
-    Customer(String name) {
+    Customer(String name, String description) {
         this.customerName = name;
+        this.description = description;
         this.cart = new Cart();  
     }  
 
@@ -46,6 +48,7 @@ class Customer {
         return address;
     }
 }
+
 
 
 

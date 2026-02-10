@@ -6,17 +6,17 @@ class Customer {
     private String description;
     private Cart cart; 
 
-    Customer(String name, String description) {
+    public Customer(String name, String description) {
         this.customerName = name;
         this.description = description;
         this.cart = new Cart();  
     }  
 
-    void enterEmail(String email) {
+    public void enterEmail(String email) {
         this.email = email;
     }
 
-    void enterPhone(String phone) {
+    public void enterPhone(String phone) {
         if (phone.length() != 9) {
             System.out.println("Phone Number excceds/not enough length.");
         } else {
@@ -24,19 +24,19 @@ class Customer {
         }  
     }
 
-    void enterAddress(String address) {
+    public void enterAddress(String address) {
         this.address = address;
     }
 
-    void getcustomerName() {
+    public void getcustomerName() {
         return name;
     }
 
-    void getEmail() {
+    public void getEmail() {
         return email;
     }
 
-    void getPhone() {
+    public void getPhone() {
         if (phone.length() === 9) {
             return phone;
         } else {
@@ -44,10 +44,11 @@ class Customer {
         }
     }
 
-    void getAddress() {
+    public void getAddress() {
         return address;
     }
 }
+
 
 
 

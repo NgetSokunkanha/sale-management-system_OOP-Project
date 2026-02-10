@@ -1,30 +1,49 @@
-class Cart {
-    Product[] products = new Product[10]; 
-    int[] quantities = new int[10];
-    int itemCount = 0;         
+public class Cart {
+    private Product[] products = new Product[10]; // array of products
+    private int[] quantities = new int[10];       // quantities for each product
+    private int itemCount = 0;                    // number of all items that have buy
+    private String description;              
 
-    void addProduct(Product product, int quantity) {
-        products[itemCount] = product;
-        quantities[itemCount] = quantity;
-        itemCount++;
+    public Cart(String description) {
+        this.description = description;
     }
 
-    double calculateTotal(Discount discount) {
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        if (description != null && !description.isEmpty()) {
+            this.description = description;
+        }
+    }
+
+    public void addProduct(Product product, int quantity) {
+        if (product != null && quantity > 0 && itemCount < products.length) {
+            products[itemCount] = product;
+            quantities[itemCount] = quantity;
+            itemCount++;
+        }
+    }
+
+    public double calculateTotal() {
         double total = 0;
         for (int i = 0; i < itemCount; i++) {
-            double price = products[i].DiscountProduct();
-            if (discount != null && discount.active && discount.product == products[i]) {
-                price = price * (1 - discount.percent / 100);
+            if (products[i] != null) { 
+                total += products[i].getPrice() * quantities[i];
             }
-            total += price * quantities[i];
         }
         return total;
     }
 
-    void printCart() {
+    public void printCart() {
         System.out.println("Cart items:");
         for (int i = 0; i < itemCount; i++) {
-            System.out.println(products[i].name + " x" + quantities[i] + " | $" + products[i].DiscountProduct());
+            if (products[i] != null) { 
+                System.out.println(
+                    products[i].getName() + " x" + quantities[i] + " | $" + products[i].getPrice()
+                );
+            }
         }
     }
 }

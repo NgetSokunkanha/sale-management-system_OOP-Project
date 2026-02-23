@@ -20,7 +20,7 @@ class CustomerClass implements Customer {
     private String password;
     private Cart cart; 
 
-    public Customer(String customerName, String cartDescription) {
+    public CustomerClass(String customerName, String cartDescription) {
         this.customerName = customerName;
         this.cart = new Cart(cartDescription); // Cart created with description
     }
@@ -81,3 +81,4 @@ class CustomerClass implements Customer {
     } 
 
 }
+

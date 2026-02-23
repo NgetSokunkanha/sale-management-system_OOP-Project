@@ -1,4 +1,18 @@
-class Customer {
+interface Customer {
+    public String getCustomerName();
+    public String getEmail();
+    public String getPhone();
+    public String getAddress();
+    public Cart getCart();
+    public boolean login(String inputPassword);
+    public void setEmail(String email);
+    public void setPhone(String phone);
+    public void setAddress(String address);
+    public void setPassword(String password);
+}
+
+
+class CustomerClass implements Customer {
     private String customerName;
     private String email;
     private String phone;
@@ -65,4 +79,5 @@ class Customer {
             System.out.println("Your Password must be at least 8 chars, include uppercase, lowercase and number.");
         }
     } 
+
 }

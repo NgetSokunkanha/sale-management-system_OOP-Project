@@ -1,3 +1,4 @@
+package other;
 public class Product {
     private String barcodeProduct;
     private String name;
@@ -16,25 +17,11 @@ public class Product {
         productCount++;
     }
 
-    public static int getProductCount() {
-        return productCount;
-    }
-
-    public String getBarcodeProduct() {
-        return barcodeProduct;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public double getPrice() {
-        return price;
-    }
-
-    public int getStock() {
-        return stock;
-    }
+    public String getBarcodeProduct() { return barcodeProduct; }
+    public String getName() { return name; }
+    public double getPrice() { return price; }
+    public int getStock() { return stock; }
+    public String getExpireDate() { return expireDate; }
 
     public void setPrice(double price) {
         if (price > 0) {
@@ -51,6 +38,12 @@ public class Product {
     public void reduceStock(int amount) {
         if (amount > 0 && amount <= stock) {
             stock -= amount;
+        }
+    }
+
+    public void setExpireDate(String expireDate) {
+        if (expireDate != null && !expireDate.isEmpty()) {
+            this.expireDate = expireDate;
         }
     }
 

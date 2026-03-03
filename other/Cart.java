@@ -1,3 +1,4 @@
+package other;
 public class Cart {
     private Product[] products = new Product[10]; // array of products
     private int[] quantities = new int[10];       // quantities for each product
@@ -11,6 +12,17 @@ public class Cart {
     public String getDescription() {
         return description;
     }
+    public int getItemCount() {
+        return itemCount;
+    }
+
+    public Product[] getProducts() {
+        return products;
+    }
+
+    public int[] getQuantities() {
+        return quantities;
+    }
 
     public void setDescription(String description) {
         if (description != null && !description.isEmpty()) {
@@ -19,11 +31,20 @@ public class Cart {
     }
 
     public void addProduct(Product product, int quantity) {
-        if (product != null && quantity > 0 && itemCount < products.length) {
+        if (product == null || quantity <= 0) return;
+
+        for (int i = 0; i < itemCount; i++) {
+            if (products[i] != null && products[i].equals(product)) {
+                quantities[i] += quantity;
+                return;
+            }
+        }
+
+        if (itemCount < products.length) {
             products[itemCount] = product;
             quantities[itemCount] = quantity;
             itemCount++;
-        }
+        } 
     }
 
     public double calculateTotal() {
@@ -46,4 +67,17 @@ public class Cart {
             }
         }
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Cart{");
+        sb.append("products=").append(products);
+        sb.append(", quantities=").append(quantities);
+        sb.append(", itemCount=").append(itemCount);
+        sb.append(", description=").append(description);
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

@@ -1,5 +1,4 @@
 package other;
-import user.Customer;
 
 class Receipt {
     private Customer customer;

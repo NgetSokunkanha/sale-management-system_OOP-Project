@@ -1,8 +1,20 @@
 package user;
 public class Admin extends Staff {
+    private String departmentName;
 
-    public Admin(Staff s1) {
-        super(s1.getId(), s1.getUsername(), s1.getPassword(), s1.getGender(), "Admin");
+    public Admin(String id, String username, String password, String gender, String departmentName) {
+        super(id, username, password, gender);
+        this.departmentName = departmentName;
+    }
+    
+    public String getDepartmentName() { return departmentName; }
+
+    public void setDepartmentName(String departmentName) {
+        if (departmentName != null && !departmentName.trim().isEmpty()) {
+            this.departmentName = departmentName.trim();
+        } else {
+            this.departmentName = "Unknown Department";
+        }
     }
 
     @Override
@@ -12,8 +24,18 @@ public class Admin extends Staff {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (this == obj) return true;
+        if (!(obj instanceof Admin)) return false;
+        Admin other = (Admin) obj;
+        return super.equals(obj) && this.departmentName.equals(other.departmentName);
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Admin [departmentName=" + departmentName + "]";
+    }
+
+    
 }
 
 

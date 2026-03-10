@@ -1,11 +1,11 @@
 package controller;
+
 import java.util.ArrayList;
 import other.MenuItem;
 import user.Admin;
 import user.Delivery;
 import user.IStaff;
 import user.Manager;
-import user.Staff;
 
 public class MiniMartShop {
 
@@ -28,21 +28,10 @@ public class MiniMartShop {
         seedDefaultUsers();
     }
 
-    @Override
-    public String toString() {
-        return "MiniMartShop {users=" + users + ", loggedInUser=" + loggedInUser + ", getLastMessage()="
-                + getLastMessage() + "}";
-    }
-
     private void seedDefaultUsers() {
-        Staff s1 = new Staff("1", "Kanha", "123", "M", "Admin");
-        users.add(new Admin(s1));
-
-        Staff s2 = new Staff("2", "Mana", "456", "M", "Manager");
-        users.add(new Manager(s2));
-
-        Staff s3 = new Staff("3", "Nita", "789", "F", "Delivery");
-        users.add(new Delivery(s3));
+        users.add(new Admin("1", "Kanha", "123456", "Female", "Office"));
+        users.add(new Manager("2", "Mana", "123456", "Female", 500));
+        users.add(new Delivery("3", "Nita", "123456", "Female", "Motorbike"));
     }
 
     public void login(String username, String password) {
@@ -59,14 +48,22 @@ public class MiniMartShop {
                 }
 
                 loggedInUser = user;
-                setLastMessage("Login success. Welcome " + user.getUsername() + " as " + user.getRole() + "!");
+                setLastMessage("Login success. Welcome " + user.getUsername());
                 return;
             }
         }
         setLastMessage("Login failed: user not found.");
     }
+
+    public void logout() {
+        loggedInUser = null;
+        setLastMessage("Logged out successfully.");
+    }
+
     public void createMenuItem(String itemId, String name, String category,
                                double price, boolean available) {
+
+        if (!requirePermission(CREATE_PRODUCT)) return;
 
         if (itemId == null || itemId.trim().isEmpty()) {
             setLastMessage("Cannot create menu item: itemId is empty.");
@@ -85,16 +82,65 @@ public class MiniMartShop {
     }
 
     public void printMenuItems() {
-        System.out.println("\n--- Menu Items (" + menuItems.size() + ") ---");
+        System.out.println("\n Menu Items (" + menuItems.size() + ") ");
         if (menuItems.isEmpty()) System.out.println("No menu items.");
         for (MenuItem item : menuItems) {
             System.out.println(item);
         }
     }
-    public void logout() {
-        loggedInUser = null;
-        setLastMessage("Logged out successfully.");
+
+    public void createProduct() {
+        if (!requirePermission(CREATE_PRODUCT)) return;
+        System.out.println("Product created.");
     }
+
+    public void updateProduct() {
+        if (!requirePermission(UPDATE_PRODUCT)) return;
+        System.out.println("Product updated.");
+    }
+
+    public void viewReport() {
+        if (!requirePermission(VIEW_REPORT)) return;
+        System.out.println("Viewing report.");
+    }
+
+    public void viewOrder() {
+        if (!requirePermission(VIEW_ORDER)) return;
+        System.out.println("Viewing orders.");
+    }
+
+    public void updateDeliveryStatus() {
+        if (!requirePermission(UPDATE_DELIVERY_STATUS)) return;
+        System.out.println("Delivery status updated.");
+    }
+
+    private boolean requirePermission(String action) {
+        if (loggedInUser == null) {
+            System.out.println("You need to login first.");
+            return false;
+        }
+
+        if (!loggedInUser.can(action)) {
+            System.out.println("Access denied for action: " + action);
+            return false;
+        }
+
+        return true;
+    }
+
+    public void demoPermissions() {
+        System.out.println("\n Polymorphism Permission Test ");
+
+        String[] actions = { CREATE_PRODUCT, VIEW_REPORT, VIEW_ORDER };
+
+        for (IStaff s : users) {    
+            System.out.println("\nUser: " + s.getUsername());
+            for (String action : actions) {
+                System.out.println("Can perform " + action + " ? " + s.can(action));
+            }
+        }
+    }
+
     private void setLastMessage(String msg) {
         lastMessage = msg;
     }
@@ -111,43 +157,8 @@ public class MiniMartShop {
         return loggedInUser;
     }
 
-    private boolean requirePermission(String action) {
-        if (loggedInUser == null) {
-            System.out.println("You need to login first.");
-            return false;
-        }
-
-        if (!loggedInUser.can(action)) {
-            System.out.println("Access denied for your action: " + action);
-            return false;
-        }
-
-        return true;
+    // Add getter for polymorphism demo in Main if needed
+    public ArrayList<IStaff> getUsers() {
+        return users;
     }
-
-    public void createProduct() {
-        if (!requirePermission("CREATE_PRODUCT")) return;
-        System.out.println("Product created.");
-    }
-
-    public void updateProduct() {
-        if (!requirePermission("UPDATE_PRODUCT")) return;
-        System.out.println("Product updated.");
-    }
-
-    public void viewReport() {
-        if (!requirePermission("VIEW_REPORT")) return;
-        System.out.println("Viewing report.");
-    }
-
-    public void viewOrder() {
-        if (!requirePermission("VIEW_ORDER")) return;
-        System.out.println("Viewing orders.");
-    }
-
-    public void updateDeliveryStatus() {
-        if (!requirePermission("UPDATE_DELIVERY_STATUS")) return;
-        System.out.println("Delivery status updated.");
-    }
-
 }

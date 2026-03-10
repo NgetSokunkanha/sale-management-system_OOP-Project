@@ -1,46 +1,24 @@
 
 package user;
 
-public class Staff implements IStaff {
+public abstract class Staff implements IStaff {
     private String id;
     private String username;
     private String password;
     private String gender;
-    private String role;
     private boolean active;
 
-    public Staff(String id, String username, String password, String gender, String role) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.gender = gender;
-        this.role = role;
+    public Staff(String id, String username, String password, String gender) {
+        setId(id);
+        setUsername(username);
+        setPassword(password);
+        setGender(gender);    
+
         this.active = true;
     }
 
     @Override
-    public boolean can(String action) {
-        if (!active || action == null) {
-            return false;
-        } 
-        switch (role.toLowerCase()) {
-            case "admin":
-                return true; 
-
-            case "manager":
-                return action.equalsIgnoreCase("CREATE_PRODUCT") ||
-                       action.equalsIgnoreCase("VIEW_REPORT") ||
-                       action.equalsIgnoreCase("VIEW_ORDER") ||
-                       action.equalsIgnoreCase("UPDATE_DELIVERY_STATUS");
-
-            case "delivery":
-                return action.equalsIgnoreCase("UPDATE_DELIVERY_STATUS") ||
-                       action.equalsIgnoreCase("VIEW_ORDER");
-
-            default:
-                return false;
-        }
-    }
+    public abstract boolean can(String action);
 
     @Override
     public String getId() {
@@ -59,11 +37,6 @@ public class Staff implements IStaff {
     @Override
     public String getGender() {
         return gender;
-    }
-
-    @Override
-    public String getRole() {
-        return role;
     }
 
     public boolean isActive() {
@@ -109,14 +82,6 @@ public class Staff implements IStaff {
         }
     }
 
-    public void setRole(String role) {
-        if (role != null && !role.trim().isEmpty()) {
-            this.role = role.trim();
-        } else {
-            this.role = "staff";
-        }
-    }
-
     public void setActive(boolean active) {
         this.active = active;
     }
@@ -135,7 +100,6 @@ public class Staff implements IStaff {
         return "Staff {id=" + id +
         ", username=" + username + 
         ", gender=" + gender + 
-        ", role=" + role + 
         ", active=" + active + "}";
     }
 }

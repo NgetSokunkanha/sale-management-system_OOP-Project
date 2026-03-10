@@ -1,24 +1,45 @@
 package user;
 
 public class Delivery extends Staff{
+    private String vehicleType;
 
-    public Delivery(Staff s2) {
-        super(s2.getId(), s2.getUsername(), s2.getPassword(), s2.getGender(), "Delivery");
+    public Delivery(String id, String username, String password, String gender, String vehicleType) {
+        super(id, username, password, gender);
+        this.vehicleType = vehicleType;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        if (vehicleType != null && !vehicleType.trim().isEmpty()) {
+            this.vehicleType = vehicleType.trim();
+        } else {
+            this.vehicleType = "Unknown Vehicle";
+        }
     }
 
     @Override
     public boolean can(String action) {
         if (action == null) return false;
 
-        return action.equals(controller.MiniMartShop.CREATE_PRODUCT) ||
-               action.equals(controller.MiniMartShop.VIEW_REPORT) ||
+        return action.equals(controller.MiniMartShop.VIEW_REPORT) ||
                action.equals(controller.MiniMartShop.VIEW_ORDER) ||
                action.equals(controller.MiniMartShop.UPDATE_DELIVERY_STATUS);
     }
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (this == obj) return true;
+        if (!(obj instanceof Delivery)) return false;
+        Delivery other = (Delivery) obj;
+        return super.equals(obj) &&
+               this.vehicleType.equals(other.vehicleType);
     }
 
+    @Override
+    public String toString() {
+        return super.toString() + " Delivery [vehicleType=" + vehicleType + "]";
+    }   
 }

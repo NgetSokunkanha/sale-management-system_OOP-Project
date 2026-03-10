@@ -1,9 +1,22 @@
 package user;
 public class Manager extends Staff {
+    private double bonus;
 
+    public Manager(String id, String username, String password, String gender, double bonus) {
+        super(id, username, password, gender);
+        this.bonus = bonus;
+    }
 
-    public Manager(Staff s1) {
-        super(s1.getId(), s1.getUsername(), s1.getPassword(), s1.getGender(), "Manager");
+    public double getBonus() {
+        return bonus;
+    }
+
+    public void setBonus(double bonus) {
+        if (bonus >= 0) {
+            this.bonus = bonus;
+        } else {
+            this.bonus = 0;
+        }
     }
 
     @Override
@@ -17,7 +30,15 @@ public class Manager extends Staff {
 
     @Override
     public boolean equals(Object obj) {
-        return super.equals(obj);
+        if (this == obj) return true;
+        if (!(obj instanceof Manager)) return false;
+        Manager other = (Manager) obj;
+        return super.equals(obj) && this.bonus == other.bonus;
     }
+
+    @Override
+    public String toString() {
+        return super.toString() + " Manager [bonus=" + bonus + "]";
+    }   
   
 }

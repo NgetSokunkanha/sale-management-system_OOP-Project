@@ -1,6 +1,4 @@
-import other.Cart;
-
-package user; 
+package other; 
 class Customer {
     private String customerName;
     private String email;

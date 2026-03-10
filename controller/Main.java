@@ -1,12 +1,16 @@
 package controller;
 
 public class Main {
+
     public static void main(String[] args) {
 
         MiniMartShop shop = new MiniMartShop();
 
-        // Admin login & create menu
-        shop.login("Kanha", "123");
+        //  Polymorphism Demo 
+        shop.demoPermissions(); 
+
+        // Admin login & create menu 
+        shop.login("Kanha", "123456");
         System.out.println(shop.getLastMessage());
 
         shop.createMenuItem("M001", "Apple", "Fruit", 2.5, true);
@@ -14,33 +18,31 @@ public class Main {
         shop.createMenuItem("M003", "Coke", "Drink", 1.0, true);
 
         System.out.println(shop.getLastMessage());
-
         shop.printMenuItems();
+
         shop.logout();
         System.out.println(shop.getLastMessage());
         System.out.println();
 
-        // Manager login (should not create menu)
-        shop.login("Mana", "456");
+        //  Manager login
+        shop.login("Mana", "123456");
         System.out.println(shop.getLastMessage());
 
-        shop.createMenuItem("M004", "Orange", "Fruit", 3.0, true);
-        System.out.println(shop.getLastMessage()); // Permission deny
+        shop.createMenuItem("M004", "Orange", "Fruit", 3.0, true); // Denied
+        shop.viewReport();  // Allowed
+        shop.updateDeliveryStatus(); // Denied
 
-        shop.viewReport();  // Allow
-        shop.updateDeliveryStatus(); // Not allow
         shop.logout();
         System.out.println();
 
-
-        // Delivery login (minimal permissions)
-  
-        shop.login("Nita", "789");
+        //  Delivery login 
+        shop.login("Nita", "123456");
         System.out.println(shop.getLastMessage());
 
         shop.createMenuItem("M005", "Pepsi", "Drink", 1.2, true); // Denied
-        shop.viewOrder(); // Allow
-        shop.updateDeliveryStatus(); // Allow
+        shop.viewOrder(); // Allowed
+        shop.updateDeliveryStatus(); // Allowed
+
         shop.logout();
     }
 }

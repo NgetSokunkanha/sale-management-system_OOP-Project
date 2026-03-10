@@ -140,6 +140,9 @@ public class MiniMartShop {
             }
         }
     }
+    public ArrayList<IStaff> getUsers() {
+        return users;
+    }
 
     private void setLastMessage(String msg) {
         lastMessage = msg;
@@ -156,9 +159,5 @@ public class MiniMartShop {
     public IStaff getLoggedInUser() {
         return loggedInUser;
     }
-
-    // Add getter for polymorphism demo in Main if needed
-    public ArrayList<IStaff> getUsers() {
-        return users;
-    }
+    
 }

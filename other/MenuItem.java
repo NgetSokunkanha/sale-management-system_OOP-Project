@@ -1,6 +1,7 @@
 package other;
 
-import user.IStaff;
+import exception.InvalidDataException;
+import user.IStaff; 
 
 public class MenuItem {
 
@@ -13,7 +14,8 @@ public class MenuItem {
     private IStaff createdBy;
 
     public MenuItem(String itemId, String name, String category,
-                    double price, boolean available, IStaff createdBy) {
+                    double price, boolean available, IStaff createdBy)
+                    throws InvalidDataException {
 
         setCreatedBy(createdBy);  
         setItemId(itemId);
@@ -30,32 +32,43 @@ public class MenuItem {
     public boolean isAvailable() { return available; }
     public IStaff getCreatedBy() { return createdBy; }
 
-    public void setCreatedBy(IStaff createdBy) {
+    public void setCreatedBy(IStaff createdBy) throws InvalidDataException {
         if (createdBy == null) {
-            System.out.println("Cannot create menu item: Staff is required.");
+            throw new InvalidDataException("Can not create menu item. Staff is required.");
         } else {
             this.createdBy = createdBy;
         }
     }
 
-    public void setItemId(String itemId) {
-        if (isBlank(itemId)) this.itemId = "UNKNOWN";
-        else this.itemId = itemId.trim();
+    public void setItemId(String itemId) throws InvalidDataException {
+        if (isBlank(itemId)) {
+            throw new InvalidDataException("Item ID can not be empty.");
+        } else {
+            this.itemId = itemId.trim();
+        }
     }
 
-    public void setName(String name) {
-        if (isBlank(name)) this.name = "No Name";
-        else this.name = name.trim();
+    public void setName(String name) throws InvalidDataException {
+        if (isBlank(name)) {
+            throw new InvalidDataException("Item name can not be empty.");
+        } else {
+            this.name = name.trim();
+        }
     }
 
-    public void setCategory(String category) {
-        if (isBlank(category)) this.category = "Unknown";
-        else this.category = category.trim();
+    public void setCategory(String category) throws InvalidDataException {
+        if (isBlank(category)) {
+            throw new InvalidDataException("Item category can not be empty.");
+        } else {
+            this.category = category.trim();
+        }
     }
 
-    public void setPrice(double price) {
-        if (price < 0) this.price = 0;
-        else this.price = price;
+    public void setPrice(double price) throws InvalidDataException {
+        if (price < 0) {
+            throw new InvalidDataException("Item price can not be negative.");
+        }
+        this.price = price;
     }
 
     public void setAvailable(boolean available) {

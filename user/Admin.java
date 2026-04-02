@@ -2,18 +2,19 @@ package user;
 public class Admin extends Staff {
     private String departmentName;
 
-    public Admin(String id, String username, String password, String gender, String departmentName) {
+    public Admin(String id, String username, String password, String gender, String departmentName) 
+        throws exception.InvalidDataException {
         super(id, username, password, gender);
         this.departmentName = departmentName;
     }
     
     public String getDepartmentName() { return departmentName; }
 
-    public void setDepartmentName(String departmentName) {
+    public void setDepartmentName(String departmentName) throws exception.InvalidDataException {
         if (departmentName != null && !departmentName.trim().isEmpty()) {
             this.departmentName = departmentName.trim();
         } else {
-            this.departmentName = "Unknown Department";
+            throw new exception.InvalidDataException("Department name can not be null or empty.");
         }
     }
 

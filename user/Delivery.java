@@ -3,7 +3,8 @@ package user;
 public class Delivery extends Staff{
     private String vehicleType;
 
-    public Delivery(String id, String username, String password, String gender, String vehicleType) {
+    public Delivery(String id, String username, String password, String gender, String vehicleType) 
+        throws exception.InvalidDataException {
         super(id, username, password, gender);
         this.vehicleType = vehicleType;
     }
@@ -12,11 +13,11 @@ public class Delivery extends Staff{
         return vehicleType;
     }
 
-    public void setVehicleType(String vehicleType) {
+    public void setVehicleType(String vehicleType) throws exception.InvalidDataException {
         if (vehicleType != null && !vehicleType.trim().isEmpty()) {
             this.vehicleType = vehicleType.trim();
         } else {
-            this.vehicleType = "Unknown Vehicle";
+            throw new exception.InvalidDataException("Vehicle type cannot be null or empty.");
         }
     }
 

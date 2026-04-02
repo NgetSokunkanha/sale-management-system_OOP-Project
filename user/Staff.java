@@ -1,5 +1,6 @@
 
 package user;
+import exception.InvalidDataException; 
 
 public abstract class Staff implements IStaff {
     private String id;
@@ -8,7 +9,9 @@ public abstract class Staff implements IStaff {
     private String gender;
     private boolean active;
 
-    public Staff(String id, String username, String password, String gender) {
+    public Staff(String id, String username, String password, String gender) 
+        throws InvalidDataException {
+
         setId(id);
         setUsername(username);
         setPassword(password);
@@ -48,39 +51,69 @@ public abstract class Staff implements IStaff {
         return password != null && password.equals(input);
     }
 
-    public void setId(String id) {
-        if (id != null && !id.trim().isEmpty()) {
-            this.id = id.trim();
-        } else {
-            this.id = "UNKNOWN";
-        }
+    public void deactivate() {
+        active = false;
     }
 
-    public void setUsername(String username) {
-        if (username != null && !username.trim().isEmpty()) {
-            this.username = username.trim();
-        } else {
-            this.username = "user" + this.id;
+    public void setId(String id) throws InvalidDataException {
+        if (id == null || id.trim().isEmpty()) {
+            throw new InvalidDataException("Staff ID cannot be empty.");
         }
+
+        id = id.trim();
+
+        if (id.length() != 6) {
+            throw new InvalidDataException("Staff ID must be exactly 6 digits.");
+        }
+
+        try {
+            Integer.parseInt(id); 
+        } catch (NumberFormatException e) {
+            throw new InvalidDataException("Staff ID must contain only numbers.");
+        }
+
+        this.id = id;
     }
 
-    public void setPassword(String password) {
-        if (password != null && password.length() >= 6) {
-            this.password = password;
-        } else {
-            this.password = "pw" + this.id;
+    public void setUsername(String username) throws InvalidDataException {
+        if (username == null || username.trim().isEmpty()) {
+            throw new InvalidDataException("Username cannot be empty.");
         }
+        username = username.trim();
+        for (int i = 0; i < username.length(); i++) {
+            if (!Character.isLetter(username.charAt(i))) {
+                throw new InvalidDataException("Username must contain only letters.");
+            }
+        }
+        this.username = username;
     }
 
-    public void setGender(String gender) {
-        if (gender != null &&
-           (gender.equalsIgnoreCase("Male") ||
-            gender.equalsIgnoreCase("Female"))) {
+    public void setPassword(String password) throws InvalidDataException {
+        if (password == null || password.length() < 6) {
+            throw new InvalidDataException("Password must be at least 6 digits.");
+        }
+        for (int i = 0; i < password.length(); i++) {
+            if (!Character.isDigit(password.charAt(i))) {
+                throw new InvalidDataException("Password must contain only numbers.");
+            }
+        }
+        this.password = password;
+    }
+
+    public void setGender(String gender) throws InvalidDataException {
+        if (gender == null || gender.trim().isEmpty()) {
+            throw new InvalidDataException("Gender cannot be empty.");
+        }
+
+        gender = gender.trim();
+
+        if (gender.equalsIgnoreCase("Male") || gender.equalsIgnoreCase("Female")) {
             this.gender = gender;
         } else {
-            this.gender = "Unknown";
+            throw new InvalidDataException("Gender must be 'Male' or 'Female' only.");
         }
     }
+    
 
     public void setActive(boolean active) {
         this.active = active;
@@ -102,5 +135,6 @@ public abstract class Staff implements IStaff {
         ", gender=" + gender + 
         ", active=" + active + "}";
     }
+
 }
 
